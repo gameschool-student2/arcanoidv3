@@ -1,5 +1,6 @@
 #include <windows.h>
 #include <string>
+#include <math.h>
 
 struct {
 	HWND hWnd;
@@ -21,6 +22,7 @@ struct box {
 
 obj racket, ball;
 box boxes[39]{};
+box dots[19]{};
 float lives = 3;
 int score = 0;
 int level = 1;
@@ -314,7 +316,10 @@ void triggerPoints() {
 	trigger1y = ball.y + ball.height * diry;
 	trigger2y = ball.y + ball.height * not(diry);
 	for (int i = 0; i < boxesInL1; i++) {
-		if (trigger1x + ball.speed >= boxes[i].x && trigger1x - ball.speed <= boxes[i].x + boxes[i].width && trigger1y + ball.speed >= boxes[i].y && trigger1y - ball.speed <= boxes[i].y + boxes[i].height) {
+		if (trigger1x + ball.speed >= boxes[i].x && 
+			trigger1x - ball.speed <= boxes[i].x + boxes[i].width && 
+			trigger1y + ball.speed >= boxes[i].y && 
+			trigger1y - ball.speed <= boxes[i].y + boxes[i].height) {
 			hitd = i;
 			hity = trigger1y;
 			hitx = trigger1x;
@@ -365,6 +370,29 @@ void rayConstr() {
 		}
 		rayx = rayx + 4 * ball.dirx;
 		rayy += 4 * (diry * 2 - 1);
+	}
+}
+
+void sphere() {
+	trigger1x = ball.x + ball.width * (ball.dirx == -1) + ball.speed * ball.dirx;
+	trigger2x = ball.x + ball.width * (ball.dirx == 1) + ball.speed * ball.dirx;
+	trigger1y = ball.y + ball.height * diry + ball.speed * (2 * diry - 1);
+	trigger2y = ball.y + ball.height * not(diry) + ball.speed * (2 * diry - 1);
+	//rayx = ball.x + ball.width * (ball.dirx == 1) + ball.speed * ball.dirx;
+	//rayy = ball.y + ball.height * diry + ball.speed * (2 * diry - 1);
+	dots[0].x = max(trigger1x, trigger2x) + ball.speed * ball.dirx;
+	dots[0].y = max(trigger1y, trigger2y) + ball.speed * (2 * diry - 1);
+	//dots[9].x = rayx + ball.speed * ball.dirx;
+	//dots[9].y = rayy + ball.speed * (2 * diry - 1);
+	dots[18].x = min(trigger1x, trigger2x) + ball.speed * ball.dirx;
+	dots[18].y = min(trigger1y, trigger2y) + ball.speed * (2 * diry - 1);
+	for (int i = 1; i < 10; i++) {
+		dots[i].x = dots[i - 1].x;
+		dots[i].y = dots[i - 1].y + 10 * (2 * diry - 1);
+	}
+	for (int i = 10; i < 19; i++) {
+		dots[i].y = dots[i - 1].y;
+		dots[i].x = dots[i - 1].x + 10 * ball.dirx;
 	}
 }
 
