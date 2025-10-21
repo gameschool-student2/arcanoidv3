@@ -45,5 +45,20 @@
     <Image Include="arcanoidv3.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="..\x64\Debug\ball.bmp">
+      <Filter>Source Files</Filter>
+    </Image>
+    <Image Include="..\x64\Debug\jungle.bmp">
+      <Filter>Source Files</Filter>
+    </Image>
+    <Image Include="..\x64\Debug\mandrill.bmp">
+      <Filter>Source Files</Filter>
+    </Image>
+    <Image Include="..\x64\Debug\racket.bmp">
+      <Filter>Source Files</Filter>
+    </Image>
+    <Image Include="..\x64\Debug\tiger.bmp">
+      <Filter>Source Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

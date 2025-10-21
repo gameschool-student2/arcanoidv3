@@ -135,6 +135,11 @@
     <ResourceCompile Include="arcanoidv3.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\x64\Debug\ball.bmp" />
+    <Image Include="..\x64\Debug\jungle.bmp" />
+    <Image Include="..\x64\Debug\mandrill.bmp" />
+    <Image Include="..\x64\Debug\racket.bmp" />
+    <Image Include="..\x64\Debug\tiger.bmp" />
     <Image Include="arcanoidv3.ico" />
     <Image Include="small.ico" />
   </ItemGroup>
